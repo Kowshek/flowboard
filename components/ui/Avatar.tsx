@@ -21,13 +21,14 @@ export function Avatar({ src, name, size = "md", className }: AvatarProps) {
   const sizeClasses = {
     sm: "h-7 w-7 text-xs",
     md: "h-9 w-9 text-sm",
-    lg: "h-11 w-11 text-base",
+    lg: "h-10 w-10 text-sm",
   };
 
   return (
     <div
       className={cn(
-        "relative rounded-full overflow-hidden bg-accent/20 flex items-center justify-center flex-shrink-0",
+        "relative rounded-full overflow-hidden flex items-center justify-center flex-shrink-0",
+        "bg-violet-100 text-violet-700 font-semibold",
         sizeClasses[size],
         className
       )}
@@ -35,7 +36,7 @@ export function Avatar({ src, name, size = "md", className }: AvatarProps) {
       {src ? (
         <Image src={src} alt={name ?? "Avatar"} fill className="object-cover" />
       ) : (
-        <span className="font-medium text-accent">{initials}</span>
+        <span>{initials}</span>
       )}
     </div>
   );

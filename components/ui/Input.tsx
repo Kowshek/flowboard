@@ -11,11 +11,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputId = id ?? label?.toLowerCase().replace(/\s+/g, "-");
 
     return (
-      <div className="space-y-1">
+      <div className="space-y-1.5">
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-text-secondary"
+            className="block text-sm font-medium text-text-primary"
           >
             {label}
           </label>
@@ -24,9 +24,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            "w-full h-10 px-3 rounded-lg bg-surface border text-text-primary text-sm placeholder:text-text-secondary transition-colors",
-            "focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent",
-            error ? "border-danger" : "border-border",
+            "w-full h-10 px-3 rounded-lg text-text-primary text-sm",
+            "bg-input-bg border placeholder:text-text-secondary",
+            "transition-all duration-150",
+            "focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent focus:bg-white",
+            error
+              ? "border-danger focus:ring-danger/30 focus:border-danger"
+              : "border-border",
             className
           )}
           {...props}

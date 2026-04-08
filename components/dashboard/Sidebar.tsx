@@ -2,39 +2,60 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
-import {
-  LayoutDashboard,
-  Users,
-  Settings,
-  Zap,
-} from "lucide-react";
+import { BarChart3, LayoutDashboard, Users, Settings, LogOut } from "lucide-react";
+
+interface SidebarProps {
+  user: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  };
+}
 
 const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/customers", label: "Customers", icon: Users },
-  { href: "/settings", label: "Settings", icon: Settings },
+  { href: "/dashboard",  label: "Overview",   icon: LayoutDashboard },
+  { href: "/customers",  label: "Customers",  icon: Users           },
+  { href: "/settings",   label: "Settings",   icon: Settings        },
 ];
 
-export function Sidebar() {
+function UserInitials({ name }: { name?: string | null }) {
+  const initials = name
+    ? name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
+    : "?";
+  return (
+    <div className="h-8 w-8 rounded-full bg-violet-100 text-violet-700 flex items-center justify-center text-xs font-semibold flex-shrink-0">
+      {initials}
+    </div>
+  );
+}
+
+export function Sidebar({ user }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-60 flex-shrink-0 bg-surface border-r border-border flex flex-col">
+    <aside className="w-56 flex-shrink-0 flex flex-col bg-white border-r border-gray-200 h-full">
       {/* Logo */}
-      <div className="h-14 flex items-center px-5 border-b border-border">
-        <div className="flex items-center gap-2">
-          <div className="h-7 w-7 rounded-lg bg-accent flex items-center justify-center">
-            <Zap className="h-4 w-4 text-white" />
+      <div className="h-14 flex items-center px-4 border-b border-gray-100">
+        <div className="flex items-center gap-2.5">
+          <div className="h-7 w-7 rounded-lg bg-violet-600 flex items-center justify-center">
+            <BarChart3 className="h-4 w-4 text-white" strokeWidth={2.5} />
           </div>
-          <span className="font-semibold text-text-primary text-base">
-            Flowboard
+          <span
+            className="text-[15px] font-bold text-gray-900 tracking-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            FlowBoard
           </span>
         </div>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 py-4 px-3 space-y-0.5">
+      <nav className="flex-1 px-3 py-4 space-y-0.5">
+        <p className="px-3 mb-2 text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
+          Menu
+        </p>
         {navItems.map(({ href, label, icon: Icon }) => {
           const active =
             href === "/dashboard"
@@ -46,23 +67,40 @@ export function Sidebar() {
               key={href}
               href={href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150",
                 active
-                  ? "bg-accent/10 text-accent"
-                  : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
+                  ? "bg-violet-50 text-violet-700"
+                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
               )}
             >
-              <Icon className="h-4 w-4 flex-shrink-0" />
+              <Icon
+                className={cn("h-4 w-4 flex-shrink-0", active ? "text-violet-600" : "")}
+              />
               {label}
             </Link>
           );
         })}
       </nav>
 
-      {/* Footer */}
-      <div className="px-3 pb-4">
-        <div className="px-3 py-2 rounded-lg bg-surface-hover">
-          <p className="text-xs text-text-secondary">Flowboard v0.1</p>
+      {/* User section */}
+      <div className="px-3 pb-4 border-t border-gray-100 pt-3">
+        <div className="flex items-center gap-3 px-2 py-2 rounded-lg group">
+          <UserInitials name={user.name} />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-gray-900 truncate leading-tight">
+              {user.name ?? "User"}
+            </p>
+            <p className="text-xs text-gray-400 truncate leading-tight mt-0.5">
+              {user.email}
+            </p>
+          </div>
+          <button
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            className="p-1.5 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-colors opacity-0 group-hover:opacity-100"
+            title="Sign out"
+          >
+            <LogOut className="h-3.5 w-3.5" />
+          </button>
         </div>
       </div>
     </aside>

@@ -8,11 +8,11 @@ import { Input } from "@/components/ui/Input";
 
 export function SignupForm() {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name,     setName]     = useState("");
+  const [email,    setEmail]    = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [error,    setError]    = useState("");
+  const [loading,  setLoading]  = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -29,23 +29,23 @@ export function SignupForm() {
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setError(data.error ?? "Something went wrong.");
+      setError(data.error ?? "Something went wrong. Please try again.");
     } else {
       router.push("/login?registered=1");
     }
   }
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-6 space-y-5">
+    <div className="space-y-5">
       {error && (
-        <div className="bg-danger/10 border border-danger/20 rounded-lg px-4 py-3 text-danger text-sm">
+        <div className="bg-red-50 border border-red-100 rounded-lg px-4 py-3 text-red-600 text-sm">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
-          label="Name"
+          label="Full name"
           type="text"
           placeholder="Jane Smith"
           value={name}
@@ -72,14 +72,21 @@ export function SignupForm() {
           minLength={8}
           autoComplete="new-password"
         />
-        <Button type="submit" className="w-full" isLoading={loading}>
-          Create account
+        <Button type="submit" className="w-full" size="lg" isLoading={loading}>
+          Create free account
         </Button>
       </form>
 
-      <p className="text-center text-sm text-text-secondary">
+      <p className="text-center text-xs text-gray-400">
+        By signing up you agree to our{" "}
+        <a href="#" className="text-violet-600 hover:underline">Terms</a>{" "}
+        and{" "}
+        <a href="#" className="text-violet-600 hover:underline">Privacy Policy</a>.
+      </p>
+
+      <p className="text-center text-sm text-gray-500">
         Already have an account?{" "}
-        <Link href="/login" className="text-accent hover:text-accent-hover font-medium">
+        <Link href="/login" className="text-violet-600 hover:text-violet-700 font-semibold">
           Sign in
         </Link>
       </p>
