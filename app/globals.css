@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tailwind v4: use .dark class for dark: variants instead of prefers-color-scheme */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* ── Light theme design tokens ───────────────────────────── */
   --color-background:     #FAFAFA;
@@ -19,11 +22,26 @@
   --color-danger:         #DC2626;
 
   /* ── Typography ──────────────────────────────────────────── */
-  --font-sans:    var(--font-inter),    ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-jakarta),  ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-inter),   ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* ── Dark-theme override (landing page wrapper) ──────────────── */
+/* ── Dark-theme override — applied when .dark is on <html> ───── */
+.dark {
+  color-scheme: dark;
+  --color-background:     #0B0F19;
+  --color-surface:        #111827;
+  --color-surface-hover:  #1F2937;
+  --color-border:         rgba(255,255,255,0.1);
+  --color-input-bg:       #1F2937;
+  --color-text-primary:   #F9FAFB;
+  --color-text-secondary: #9CA3AF;
+  --color-success:        #10B981;
+  --color-warning:        #F59E0B;
+  --color-danger:         #EF4444;
+}
+
+/* ── Landing-page dark wrapper (keeps landing page always dark) ─ */
 .dark-theme {
   --color-background:     #0B0F19;
   --color-surface:        #111827;
@@ -44,7 +62,6 @@
 }
 
 html {
-  color-scheme: light;
   scroll-behavior: smooth;
 }
 
@@ -54,9 +71,10 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Shimmer sweep animation (badge, highlights) */
+/* Shimmer sweep animation */
 @keyframes shimmer {
   0%   { transform: translateX(-150%) skewX(-15deg); }
   100% { transform: translateX(350%)  skewX(-15deg); }
@@ -69,17 +87,7 @@ body {
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-surface);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: var(--color-surface); }
+::-webkit-scrollbar-thumb  { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); }

@@ -13,14 +13,14 @@ export function StatCard({ title, value, change, trend, icon: Icon }: StatCardPr
   const isUp = trend === "up";
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition-shadow duration-200">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm dark:shadow-none dark:border dark:border-white/10 p-5 hover:shadow-md dark:hover:bg-gray-800/80 transition-all duration-200">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
             {title}
           </p>
           <p
-            className="text-2xl font-bold text-gray-900 tracking-tight"
+            className="text-2xl font-bold text-gray-900 dark:text-gray-100 tracking-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {value}
@@ -29,7 +29,7 @@ export function StatCard({ title, value, change, trend, icon: Icon }: StatCardPr
             <span
               className={cn(
                 "inline-flex items-center gap-0.5 text-xs font-semibold",
-                isUp ? "text-emerald-600" : "text-red-500"
+                isUp ? "text-emerald-600 dark:text-emerald-400" : "text-red-500 dark:text-red-400"
               )}
             >
               {isUp ? (
@@ -39,11 +39,11 @@ export function StatCard({ title, value, change, trend, icon: Icon }: StatCardPr
               )}
               {change}
             </span>
-            <span className="text-xs text-gray-400">vs last month</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">vs last month</span>
           </div>
         </div>
-        <div className="h-9 w-9 rounded-xl bg-violet-50 flex items-center justify-center flex-shrink-0">
-          <Icon className="h-4.5 w-4.5 text-violet-600" />
+        <div className="h-9 w-9 rounded-xl bg-violet-50 dark:bg-violet-500/10 flex items-center justify-center flex-shrink-0">
+          <Icon className="h-4 w-4 text-violet-600 dark:text-violet-400" />
         </div>
       </div>
     </div>

@@ -5,18 +5,17 @@ export const metadata = { title: "Sign in — FlowBoard" };
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      {/* Left panel — branding */}
+    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-950">
+      {/* Left panel — branding (desktop only) */}
       <div className="hidden lg:flex flex-col justify-between w-[420px] flex-shrink-0 bg-violet-600 p-10">
         <div className="flex items-center gap-2.5">
           <div className="h-8 w-8 rounded-lg bg-white/15 flex items-center justify-center">
-            <BarChart3 className="h-4.5 w-4.5 text-white" />
+            <BarChart3 className="h-4 w-4 text-white" />
           </div>
           <span className="text-white font-bold text-lg" style={{ fontFamily: "var(--font-display)" }}>
             FlowBoard
           </span>
         </div>
-
         <div>
           <blockquote className="text-white/90 text-lg leading-relaxed font-medium mb-4">
             &ldquo;FlowBoard gave us the visibility we were missing. We went from gut-feel decisions to data-driven sprints in a week.&rdquo;
@@ -41,24 +40,21 @@ export default function LoginPage() {
             <div className="h-7 w-7 rounded-lg bg-violet-600 flex items-center justify-center">
               <BarChart3 className="h-4 w-4 text-white" />
             </div>
-            <span className="font-bold text-gray-900" style={{ fontFamily: "var(--font-display)" }}>
+            <span className="font-bold text-gray-900 dark:text-gray-100" style={{ fontFamily: "var(--font-display)" }}>
               FlowBoard
             </span>
           </div>
 
           <div className="mb-8">
-            <h1
-              className="text-2xl font-bold text-gray-900"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100" style={{ fontFamily: "var(--font-display)" }}>
               Welcome back
             </h1>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
               Sign in to your FlowBoard account
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm dark:shadow-none dark:border dark:border-white/10 p-6">
             <LoginForm />
           </div>
         </div>
