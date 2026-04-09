@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { TopBar } from "@/components/dashboard/TopBar";
+import { PageTransition } from "@/components/dashboard/PageTransition";
 
 export default async function DashboardLayout({
   children,
@@ -18,7 +19,11 @@ export default async function DashboardLayout({
       <Sidebar user={session.user} />
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         <TopBar />
-        <main className="flex-1 overflow-y-auto p-6 bg-background">{children}</main>
+        <main className="flex-1 overflow-y-auto p-6 bg-background">
+          <PageTransition>
+            <div className="max-w-7xl mx-auto w-full">{children}</div>
+          </PageTransition>
+        </main>
       </div>
     </div>
   );

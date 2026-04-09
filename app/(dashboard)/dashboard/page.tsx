@@ -1,9 +1,11 @@
 import { StatCard } from "@/components/dashboard/StatCard";
 import { RevenueChart } from "@/components/dashboard/RevenueChart";
+import { UserGrowthChart } from "@/components/dashboard/UserGrowthChart";
+import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { monthlyMetrics } from "@/lib/seed-data";
 import { Users, DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 
-export const metadata = { title: "Dashboard — FlowBoard" };
+export const metadata = { title: "Overview" };
 
 export default function DashboardPage() {
   const latest = monthlyMetrics[monthlyMetrics.length - 1];
@@ -13,16 +15,16 @@ export default function DashboardPage() {
   const usersChange = (((latest.users - prev.users) / prev.users) * 100).toFixed(1);
 
   return (
-    <div className="space-y-6 max-w-6xl">
+    <div className="space-y-6">
       {/* Page header */}
       <div>
         <h1
-          className="text-2xl font-bold text-gray-900"
+          className="text-2xl font-bold text-gray-900 dark:text-gray-100"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Overview
         </h1>
-        <p className="text-sm text-gray-400 mt-1">
+        <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
           {latest.month} — your key metrics at a glance
         </p>
       </div>
@@ -59,8 +61,14 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* Revenue chart */}
-      <RevenueChart data={monthlyMetrics} />
+      {/* Charts — 2-column grid, stacks on mobile */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <RevenueChart data={monthlyMetrics} />
+        <UserGrowthChart data={monthlyMetrics} />
+      </div>
+
+      {/* Recent Activity */}
+      <RecentActivity />
     </div>
   );
 }

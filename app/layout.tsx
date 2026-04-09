@@ -17,8 +17,44 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "FlowBoard",
-  description: "Your SaaS analytics dashboard",
+  title: {
+    default:  "FlowBoard — SaaS Analytics Dashboard",
+    template: "%s | FlowBoard",
+  },
+  description:
+    "Real-time SaaS analytics dashboard with customer management, revenue tracking, and team insights.",
+  metadataBase: new URL("https://launchflow.app"),
+  icons: {
+    icon: "/favicon.svg",
+  },
+  openGraph: {
+    title: "FlowBoard — SaaS Analytics Dashboard",
+    description:
+      "Real-time SaaS analytics dashboard with customer management, revenue tracking, and team insights.",
+    url: "https://launchflow.app",
+    siteName: "FlowBoard",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FlowBoard — SaaS Analytics Dashboard",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FlowBoard — SaaS Analytics Dashboard",
+    description:
+      "Real-time SaaS analytics dashboard with customer management, revenue tracking, and team insights.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 // Inline script runs before React hydrates to prevent flash of wrong theme.
