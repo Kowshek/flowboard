@@ -69,13 +69,13 @@ function ToggleRow({
         onClick={() => onChange(!enabled)}
         role="switch"
         aria-checked={enabled}
-        className={`relative w-9 h-5 rounded-full transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500/30 ${
-          enabled ? "bg-violet-600" : "bg-gray-200 dark:bg-gray-700"
+        className={`relative w-11 h-6 rounded-full transition-colors duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500/30 ${
+          enabled ? "bg-violet-600" : "bg-gray-300 dark:bg-gray-600"
         }`}
       >
         <span
-          className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${
-            enabled ? "translate-x-4" : "translate-x-0.5"
+          className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
+            enabled ? "translate-x-5" : "translate-x-0"
           }`}
         />
       </button>
@@ -241,8 +241,8 @@ export function SettingsClient({ initialName, email, accountId }: SettingsClient
             <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Two-factor authentication</p>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Add an extra layer of security to your account</p>
           </div>
-          <div className="relative w-9 h-5 rounded-full bg-gray-200 dark:bg-gray-700 flex-shrink-0">
-            <span className="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow-sm" />
+          <div className="relative w-11 h-6 rounded-full bg-gray-300 dark:bg-gray-600 flex-shrink-0">
+            <span className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm" />
           </div>
         </div>
         <FieldRow label="Last sign-in" value="Today" />

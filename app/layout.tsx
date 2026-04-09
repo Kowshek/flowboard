@@ -73,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jakarta.variable} h-full`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jakarta.variable} h-full`}>
       {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
